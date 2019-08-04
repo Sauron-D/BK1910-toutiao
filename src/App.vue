@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-      <Header v-show="$store.state.top_bar_flag"/>
-      <Nav v-show="$store.state.top_bar_flag"/>
+      <Header/>
+      <Nav/>
       <router-view></router-view>
     </div>
     
@@ -9,8 +9,23 @@
 
 <script>
 import Header from "./common/Header";
-import Nav from "./common/Nav"
+import Nav from "./common/Nav";
 export default {
+  data(){
+        return{
+            
+        }
+    },
+  watch:{
+        $route(to,from){
+          if(to.path==="/channels"){
+            this.$store.commit("topHideChangeMutations");
+          }
+          if(from.path==="/channels"){
+            this.$store.commit("topShowChangeMutations");
+          }
+        }
+    },
   components:{
     Header,
     Nav
@@ -26,6 +41,9 @@ export default {
     margin:0;
     padding:0;
     /* -webkit-tap-highlight-color:#ccc;  */
+  }
+  #app{
+    height:100%;
   }
 
 </style>

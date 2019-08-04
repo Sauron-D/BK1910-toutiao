@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header" v-show="$store.state.top_bar_flag">
         <div class="header_l">
             <!-- 此处 v-show/v-if  app下载提示-->
             <a href="#"></a>

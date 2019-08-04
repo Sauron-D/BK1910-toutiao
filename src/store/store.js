@@ -18,6 +18,12 @@ export default new Vuex.Store({
   mutations: {
     activeMenuChangeMutations(state,params){
       state.active_menu=params;
+    },
+    topHideChangeMutations(state){
+      state.top_bar_flag=false;
+    },
+    topShowChangeMutations(state){
+      state.top_bar_flag=true;
     }
   }
 })

@@ -1,11 +1,11 @@
 <template>
-    <div class="nav">
+    <div class="nav" v-show="$store.state.top_bar_flag">
         <div class="nav_menu">
             <!-- 点击路由切换内容部分,被点击的字体变红-->
             <a 
                 v-for="(item,index) in $store.state.channels_show"
                 :key="index"
-                :href="'#/'+$store.state.channel_address_show[index]"
+                :href="'#/'+$store.state.channel_address_show[$store.state.active_menu]"
                 :style="{color:(index===$store.state.active_menu ? '#f85959' : '#505050')}"
                 @click="activeMenuChange(index)"
             >
@@ -28,7 +28,7 @@ name:"Nav"
 export default {
     data(){
         return{
-            
+
         }
     },
     methods:{
@@ -36,7 +36,7 @@ export default {
             this.$store.commit("activeMenuChangeMutations",index);
         },
         channelsListHandler(){
-            this.$router.push("/channels")
+            this.$router.push("/channels");
         }
     }
 }
