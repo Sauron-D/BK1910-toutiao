@@ -12,6 +12,7 @@ import science from "./science/index";
 import sport from "./sport/index";
 import finance from "./finance/index";
 import world from "./world/index";
+import travel from "./travel/index"
 
 Vue.use(Router)
 
@@ -28,7 +29,8 @@ export default new Router({
     science,
     sport,
     finance,
-    world
+    world,
+    travel
   ]
 })
 

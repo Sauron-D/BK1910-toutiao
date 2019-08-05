@@ -10,6 +10,7 @@
 <script>
 import Header from "./common/Header";
 import Nav from "./common/Nav";
+import http from "./utils/http"
 export default {
   data(){
         return{
@@ -25,7 +26,7 @@ export default {
             this.$store.commit("topShowChangeMutations");
           }
         }
-    },
+  },
   components:{
     Header,
     Nav
@@ -40,7 +41,6 @@ export default {
     font-size: 75.04px;
     margin:0;
     padding:0;
-    /* -webkit-tap-highlight-color:#ccc;  */
   }
   #app{
     height:100%;

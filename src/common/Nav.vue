@@ -31,6 +31,9 @@ export default {
 
         }
     },
+    created(){
+        this.$router.replace("/"+this.$store.state.channel_address_show[this.$store.state.active_menu]);
+    },
     methods:{
         activeMenuChange(index){
             this.$store.commit("activeMenuChangeMutations",index);
@@ -61,6 +64,7 @@ export default {
         overflow-x: auto;
         white-space: nowrap;
         float: left;
+        flex: 1;
     }
     .nav .nav_menu a{
         display: inline-block;
