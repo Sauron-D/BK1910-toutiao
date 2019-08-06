@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
 import "./common/components/index.js"
-Vue.config.productionTip = false
-
-
+import vueTouch from "vue-touch";
+Vue.config.productionTip = false;
+Vue.use(vueTouch,{name:'v-touch'});
 new Vue({
   router,
   store,

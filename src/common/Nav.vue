@@ -2,15 +2,16 @@
     <div class="nav" v-show="$store.state.top_bar_flag">
         <div class="nav_menu">
             <!-- 点击路由切换内容部分,被点击的字体变红-->
-            <a 
+            <v-touch 
                 v-for="(item,index) in $store.state.channels_show"
                 :key="index"
                 :href="'#/'+$store.state.channel_address_show[$store.state.active_menu]"
                 :style="{color:(index===$store.state.active_menu ? '#f85959' : '#505050')}"
-                @click="activeMenuChange(index)"
+                @tap="activeMenuChange(index)"
+                tag="a"
             >
                 {{item}}
-            </a>
+            </v-touch>
         </div>
         <div class="menu_more">
             <div class="menu_more_shadow"></div>
