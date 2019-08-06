@@ -2,16 +2,17 @@
     <div class="channels">
         <div class="channels_head">
             <span class="title">频道管理</span>
-            <a class="backBtn" @click="goBackHandler()"></a>
+            <v-touch class="backBtn" @tap="goBackHandler()" tag="a"></v-touch>
         </div>
         <div class="channels_box">
             <span class="channels_text">点击删除以下频道</span>
             <ul class="channels_ul">
-                <li
+                <v-touch
                     v-for="(item,index) in $store.state.channels_show"
                     :key="index"
-                    @click="channelsHideHandler(index,$event)"
+                    @tap="channelsHideHandler(index,$event)"
                     class="appear_li"
+                    tag="li"
                 >
                 <transition-group 
                     @appear="appearHandler($event)"
@@ -25,7 +26,7 @@
                         {{item}}
                     </a>
                 </transition-group>
-                </li>
+                </v-touch>
                 
             </ul>
         </div>
@@ -38,9 +39,9 @@
                         @after-appear="afterappearHandler($event)"
                         tag="span"
                     >
-                        <a @click="channelsShowHandler(index,$event)" :key="index">
+                        <v-touch @tap="channelsShowHandler(index,$event)" :key="index" tag="a">
                             {{item}}
-                        </a>
+                        </v-touch>
                     </transition-group>
                 </li>
             </ul>
