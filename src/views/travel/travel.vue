@@ -1,12 +1,16 @@
 <template>
     <div class="travel">
         travel
+        <v-touch class="test" tag="div" @press="pressHandler($event)">
+
+        </v-touch>
     </div>
 </template>
 
 
 <script>
 import http from "../../utils/http";
+import { setInterval } from 'timers';
 export default {
     name:"Travel",
     data(){
@@ -19,7 +23,15 @@ export default {
            this.data=data.data;
            console.log(data.data);
        })
+    },
+    methods:{
+        pressHandler(e){
+            console.log("aaa");
+            console.log(e);
+            e.target.className="test_change"
+        }
     }
+    
 }
 </script>
 
@@ -35,6 +47,20 @@ export default {
         bottom: 0px;
         font-size: 50px;
     }
+    .travel .test{
+        width:400px;
+        height:100px;
+        background: red;
+        margin-left: 0;
+    }
+    .test_change{
+        width:400px;
+        height:100px;
+        background: blue;
+        margin-left: 200px;
+        transition: all .5s ease-in-out;
+    }
+
 </style>
 
 
