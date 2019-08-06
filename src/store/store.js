@@ -5,8 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    channels_show:["推荐","视频","热点","社会","娱乐","军事","科技","体育","财经","国际","旅游"],
-    channel_address_show:["rec","video","hot","social","showbiz","military","science","sport","finance","world","travel"],
+    channels_show:["推荐","旅游","视频","热点","社会","娱乐","军事","科技","体育","财经","国际"],
+    channel_address_show:["rec","travel","video","hot","social","showbiz","military","science","sport","finance","world"],
     channels_hide:["历史","探索","美食","育儿","养生","故事","美文"],
     channel_address_hide:["history","explore","foods","baby","health","story","essay"],
     active_menu:0,

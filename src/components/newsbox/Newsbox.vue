@@ -1,0 +1,168 @@
+<template>
+    <section class="newsbox">
+        <a class="content">
+            <div :class="data.image_list.length===0 ? 'item_detail image_on_right' : 'item_detail'">
+                <h3>{{data.title}}</h3>
+                <div class="list_img" v-if="data.image_list.length!==0">
+                    <ul>
+                        <li v-for="(item,index) in data.image_list" :key="index" class="img_list_box">
+                            <img :src="item.url">
+                        </li>
+                    </ul>
+                </div>
+                <div class="item_info">
+                    <span v-if="data.hot===1">热</span>
+                    <span>{{data.media_name}}</span>
+                    <span>评论 {{data.comment_count}}</span>
+                    <span>{{data.datetime}}</span>
+                </div>
+            </div>
+            <div class="img_right" v-if="data.image_list.length===0">
+                <img :src="data.image_url">
+            </div>
+        </a>
+    </section>
+</template>
+
+
+
+<script>
+export default {
+    props:["message"],
+    data(){
+        return{
+            data:this.message,
+            time:""
+        }
+    },
+    created(){
+        // 2019-08-06 22:32
+        let data_year=Number(this.data.datetime.split("-")[0]);
+        let data_month=Number(this.data.datetime.split("-")[1]);
+        let data_day=Number(this.data.datetime.split("-")[2].split(" ")[0]);
+        let data_hour=Number(this.data.datetime.split("-")[2].split(" ")[1].split(":")[0]);
+        let data_minute=Number(this.data.datetime.split("-")[2].split(" ")[1].split(":")[1]);
+        let date=new Date().toLocaleString();
+        // 2019/8/6 下午10:46:18
+        let now_year=Number(date.split("/")[0]);
+        let now_month=Number(date.split("/")[1]);
+        let now_day=Number(date.split("/")[2].split(" ")[0]);
+        let now_hour=Number(date.split("/")[2].split(" ")[1].substr(2,2));
+        if(date.split("/")[2].split(" ")[1].substr(0,2)==="下午"){
+            now_hour+=12;
+        }
+        let now_minute=Number(date.split("/")[2].split(":")[1]);
+        if(now_year!==data_year && now_month>=data_month){
+            this.time=now_year-data_year+"年前"
+        }else if(now_month)
+        console.log(this.time);
+    }
+}
+
+</script>
+
+
+
+<style>
+    .newsbox{
+        width: 690.4px;
+        min-height: 200px;
+        border-bottom: 1px solid rgba(221, 221, 221, 0.6);
+        margin:0 auto;
+    }
+    .newsbox .content{
+        display: inline-block;
+        width: 100%;
+        min-height: 84px;
+        font-size: 0px;
+        text-decoration: none;
+        position: relative;
+        padding: 32px 0px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        -webkit-touch-callout: none;
+        vertical-align:middle;
+        display:flex;align-items:center
+    }
+    .newsbox .item_detail{
+        display: block;
+        height: 100%;
+    }
+    .newsbox .image_on_right{
+        display: inline-block;
+        width: 67%;
+        vertical-align: middle;
+        margin: auto 0;
+        line-height:100%;
+    }
+    .newsbox .item_detail h3{
+        font-size: 34px;
+        line-height: 42px;
+        color: #222;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    .newsbox .list_img{
+        display: block;
+        min-height: 42px;
+        margin-top: 12px;
+    }
+    .newsbox .list_img ul:after{
+        content: "";
+        height: 0;
+        clear: both;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+    }
+    .newsbox .img_list_box{
+        float: left;
+    }
+    .newsbox .img_list_box img{
+        width: 226px;
+        height: 148px;
+        padding-right:4px; 
+    }
+    .newsbox .item_info{
+        color: #999;
+        overflow: hidden;
+        font-size: 0;
+        margin-top: 12px;
+    }
+    .newsbox .item_info span{
+        display: inline-block;
+        line-height: 24px;
+        font-size: 20px;
+        color: #999;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+    .newsbox .item_info span:nth-last-child(4){
+        width: 24px;
+        border: 1px solid rgba(248, 89, 89, 0.5);
+        border-radius: 4px;
+        font-size: 18px !important;
+        color: #f85959 !important;
+        text-align: center;
+    }
+    .newsbox .img_right{
+        width: 30%;
+        height: 159px;
+        position: absolute;
+        right:0;
+        top: 15%;
+    }
+    .newsbox .img_right img{
+        width: 100%;
+    }
+
+
+
+
+
+</style>
+
+
