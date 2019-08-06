@@ -1,8 +1,8 @@
-import Loading from "./index.vue";
+import Loading from "./indexTwo.vue";
 import Vue from "vue";
 export default () => {
-    let LoadingComponent = Vue.extend(Loading);
-    let vm = new LoadingComponent({
+    let LoadingComponentTwo = Vue.extend(Loading);
+    let vmTwo = new LoadingComponentTwo({
         el: document.createElement("div"),
         data:{
             flag:false
@@ -16,7 +16,7 @@ export default () => {
             }
         }
     })
-    document.body.appendChild(vm.$mount().$el)
-    return vm;
+    document.body.appendChild(vmTwo.$mount().$el)
+    return vmTwo;
 
 }
