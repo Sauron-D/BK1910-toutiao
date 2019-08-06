@@ -10,7 +10,7 @@
 <script>
 import Header from "./common/Header";
 import Nav from "./common/Nav";
-import http from "./utils/http"
+import http from "./utils/http.js"
 export default {
   data(){
         return{

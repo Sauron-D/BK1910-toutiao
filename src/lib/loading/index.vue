@@ -1,5 +1,5 @@
 <template>
-  <div class="loader">
+  <div class="loader" v-if="flag">
     <div class="loader-inner">
       <div class="loader-line-wrap">
         <div class="loader-line"></div>
@@ -27,8 +27,7 @@ export default {};
 <style>
 
 .loader {
-    background: #000;
-    background: radial-gradient(#222, #000);
+    background:rgba(0, 0, 0, 0.5) ;
     bottom: 0;
     left: 0;
     overflow: hidden;

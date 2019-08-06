@@ -67,6 +67,7 @@ export default {
         flex: 1;
     }
     .nav .nav_menu a{
+        vertical-align: middle;
         display: inline-block;
         width: 68px;
         height: 52px;
