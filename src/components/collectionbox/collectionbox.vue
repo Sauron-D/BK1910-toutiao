@@ -1,39 +1,30 @@
 <template>
-    <section class="newsbox">
-        <div class="slide_before">
-            <v-touch tag="span" @press.capture="pressHandler($event)"  @tap="pressHandler($event)">
-                <a class="content">
-                    <div :class="data.image_list.length===0 ? 'item_detail image_on_right' : 'item_detail'">
-                        <h3>{{data.title}}</h3>
-                        <div class="list_img" v-if="data.image_list.length!==0">
-                            <ul>
-                                <li v-for="(item,index) in data.image_list" :key="index" class="img_list_box">
-                                    <img :src="item.url">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="item_info">
-                            <span v-if="data.hot===1">热</span>
-                            <span>{{data.media_name}}</span>
-                            <span>评论 {{data.comment_count}}</span>
-                            <span>{{time}}</span>
-                        </div>
-                    </div>
-                    <div class="img_right" v-if="data.image_list.length===0">
-                        <img :src="data.image_url">
-                    </div>
-                </a>
-            </v-touch>
-        </div>
-        <v-touch tag="div" class="item_button collect" @tap="collectHandler($event)">收藏</v-touch>
-        <v-touch tag="div" class="item_button delete" @tap="deleteHandler($event)">删除</v-touch>
+    <section class="collectionbox">
+        <a class="content">
+            <div :class="data.image_list.length===0 ? 'item_detail image_on_right' : 'item_detail'">
+                <h3>{{data.title}}</h3>
+                <div class="list_img" v-if="data.image_list.length!==0">
+                    <ul>
+                        <li v-for="(item,index) in data.image_list" :key="index" class="img_list_box">
+                            <img :src="item.url">
+                        </li>
+                    </ul>
+                </div>
+                <div class="item_info">
+                    <span v-if="data.hot===1">热</span>
+                    <span>{{data.media_name}}</span>
+                    <span>评论 {{data.comment_count}}</span>
+                    <span>{{time}}</span>
+                </div>
+            </div>
+            <div class="img_right" v-if="data.image_list.length===0">
+                <img :src="data.image_url">
+            </div>
+        </a>
     </section>
 </template>
 
-
-
 <script>
-import { setTimeout } from 'timers';
 export default {
     props:["message"],
     data(){
@@ -44,43 +35,7 @@ export default {
         }
     },
     methods:{
-        pressHandler(e){
-            let node = e.target;
-            while (node.parentNode.nodeName != "BODY") {
-                if (node.className == "slide_before" || node.className=="slide_before slider") {
-                    break;
-                }
-                node = node.parentNode;
-            }
-            if(e.type==="press"){
-                if(node.className==="slide_before"){
-                    node.className="slide_before slider"
-                }
-            }else if(e.type==="tap"){
-                if(node.className==="slide_before slider"){
-                    node.className="slide_before"
-                }
-            } 
-        },
-        collectHandler(e){
-            e.target.parentNode.children[0].className="slide_before"
-            let collection=JSON.parse(localStorage.getItem("collection"));
-            if(collection!==null){
-                for(let i=0;i<collection.length;i++){
-                    if(collection[i].title===this.data.title) return;
-                }
-            }else{
-                collection=[];
-            }  
-            collection.push(this.data);
-            let update=JSON.stringify(collection);
-            localStorage.setItem("collection",update);
-        },
-        deleteHandler(e){
-            let retret_box=e.target.parentNode.parentNode;
-            this.$emit('dispear',this.index);
 
-        }
     },
     created(){
         let data_hour=Number(this.data.datetime.split("-")[2].split(" ")[1].split(":")[0]);
@@ -112,46 +67,38 @@ export default {
 
 
 <style>
-    .newsbox{
+    .collectionbox{
         min-height: 200px;
         border-bottom: 1px solid rgba(221, 221, 221, 0.6);
         overflow: hidden;
         position: relative;
     }
-    .newsbox .slide_before{
-        width: 690.4px;
-        min-height:150px;
-        background: #fff;
-        padding:0 30px;
-        position: relative;
-        z-index: 10000;
-        transition: margin 0.5s;
-    }
-    .newsbox .content{
+    .collectionbox .content{
         display: inline-block;
-        width: 100%;
+        width: 690.4px;
         min-height: 200px;
         font-size: 0px;
         text-decoration: none;
         position: relative;
+        margin: 0 auto;
         padding: 32px 0px;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
         -webkit-touch-callout: none;
         vertical-align:middle;
         display:flex;align-items:center
     }
-    .newsbox .item_detail{
+    .collectionbox .item_detail{
         display: block;
         height: 100%;
     }
-    .newsbox .image_on_right{
+    .collectionbox .image_on_right{
         display: inline-block;
         width: 67%;
         vertical-align: middle;
         margin: auto 0;
         line-height:100%;
     }
-    .newsbox .item_detail h3{
+    .collectionbox .item_detail h3{
         font-size: 34px;
         line-height: 42px;
         color: #222;
@@ -162,12 +109,12 @@ export default {
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
     }
-    .newsbox .list_img{
+    .collectionbox .list_img{
         display: block;
         min-height: 42px;
         margin-top: 12px;
     }
-    .newsbox .list_img ul:after{
+    .collectionbox .list_img ul:after{
         content: "";
         height: 0;
         clear: both;
@@ -175,21 +122,21 @@ export default {
         display: block;
         visibility: hidden;
     }
-    .newsbox .img_list_box{
+    .collectionbox .img_list_box{
         float: left;
     }
-    .newsbox .img_list_box img{
+    .collectionbox .img_list_box img{
         width: 226px;
         height: 148px;
         padding-right:4px; 
     }
-    .newsbox .item_info{
+    .collectionbox .item_info{
         color: #999;
         overflow: hidden;
         font-size: 0;
         margin-top: 12px;
     }
-    .newsbox .item_info span{
+    .collectionbox .item_info span{
         display: inline-block;
         line-height: 24px;
         font-size: 20px;
@@ -197,7 +144,7 @@ export default {
         margin-right: 10px;
         vertical-align: middle;
     }
-    .newsbox .item_info span:nth-last-child(4){
+    .collectionbox .item_info span:nth-last-child(4){
         width: 24px;
         border: 1px solid rgba(248, 89, 89, 0.5);
         border-radius: 4px;
@@ -205,14 +152,14 @@ export default {
         color: #f85959 !important;
         text-align: center;
     }
-    .newsbox .img_right{
+    .collectionbox .img_right{
         width: 30%;
         height: 159px;
         position: absolute;
         right:0;
         top: 15%;
     }
-    .newsbox .img_right img{
+    .collectionbox .img_right img{
         width: 100%;
     }
 
@@ -220,7 +167,7 @@ export default {
         margin-left: 150px;
         transition: margin 0.5s;
     }
-    .newsbox .item_button{
+    .collectionbox .item_button{
         width:100px;
         height: 50px;
         background: #ed4040;
@@ -231,12 +178,10 @@ export default {
         position:absolute;
         left:20px;
     }
-    .newsbox .collect{
+    .collectionbox .collect{
         top:30%;
     }
-    .newsbox .delete{
+    .collectionbox .delete{
         top:55%;
     }
 </style>
-
-

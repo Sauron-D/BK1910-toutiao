@@ -1,17 +1,8 @@
 <template>
     <div class="travel">
-        <!-- <v-touch 
-            class="test"
-            tag="div"
-            @press="pressHandler($event)"
-        >
-        </v-touch> -->
-
-
         <div v-for="(item,index) in data" :key="index" class="itemBox">
-            <Newsbox :message=item></Newsbox>
+            <Newsbox :message=[item,index] @dispear="disapearHandler"></Newsbox>
         </div>
-        
     </div>
 </template>
 
@@ -33,8 +24,17 @@ export default {
        })
     },
     methods:{
-        pressHandler(e){
-            e.target.className="test_change";
+        disapearHandler(props){
+            let elem=document.getElementsByClassName("itemBox")[props];
+            setTimeout(()=>{
+                elem.className="itemBox retreat";
+            },0)
+            setTimeout(()=>{
+                elem.className="itemBox retreat heightzero";
+            },500)
+            setTimeout(()=>{
+                elem.className="itemBox retreat heightzero dispear";
+            },2000)
         }
     },
     components:{
@@ -57,34 +57,26 @@ export default {
         /* touch-action: none; */
     }
     .travel .itemBox{
-        width: 690.4px;
+        width: 100%;
         min-height: 200px;
-        margin: 0 auto;
+        background: #ccc;
+    }
+    .retreat{
+        margin-left: 800px;
+        overflow: hidden;
+        transition: margin-left 0.5s ;
+    }
+    .heightzero{
+        min-height:0 !important;
+        height:0 !important;
+        overflow: hidden;
+        transition: all 1s linear;
+    }
+    .dispear{
+        display:none;
+        margin: 0;
     }
 
-
-
-
-
-
-
-
-
-
-    .travel .test{
-        width:400px;
-        height:100px;
-        background: red;
-        margin-left: 0;
-        display: none;
-    }
-    .test_change{
-        width:400px;
-        height:100px;
-        background: blue;
-        margin-left: 200px;
-        transition: all .5s ease-in-out;
-    }
 
 </style>
 
