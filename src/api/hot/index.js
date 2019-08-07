@@ -1,0 +1,2 @@
+import http from "../../utils/http"
+export const hot_one_api = () => http("get", "/list/?tag=news_hot&ac=wap&count=20&format=json_raw&as=A1350D24D5F9B55&cp=5D45492B05A54E1&min_behot_time=0&_signature=T.NOggAAErdGvzSXXUrRIk.zTp&i=", { })

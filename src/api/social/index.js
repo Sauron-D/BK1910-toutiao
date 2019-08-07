@@ -1,0 +1,2 @@
+import http from "../../utils/http"
+export const social_one_api = () => http("get", "/list/?tag=news_society&ac=wap&count=20&format=json_raw&as=A1F56D441569E38&cp=5D45599EF3281E1&min_behot_time=0&_signature=TtatdgAAE5RHmtdjvoLg5E7WrW&i=", {  })
