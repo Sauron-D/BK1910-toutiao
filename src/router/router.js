@@ -12,7 +12,8 @@ import science from "./science/index";
 import sport from "./sport/index";
 import finance from "./finance/index";
 import world from "./world/index";
-import travel from "./travel/index"
+import travel from "./travel/index";
+import collection from "./collection/index";
 
 Vue.use(Router)
 
@@ -30,7 +31,8 @@ export default new Router({
     sport,
     finance,
     world,
-    travel
+    travel,
+    collection
   ]
 })
 

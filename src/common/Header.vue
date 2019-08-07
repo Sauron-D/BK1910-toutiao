@@ -1,8 +1,7 @@
 <template>
     <div class="header" v-show="$store.state.top_bar_flag">
         <div class="header_l">
-            <!-- 此处 v-show/v-if  app下载提示-->
-            <a href="#"></a>
+            <v-touch tag="a" @tap="collectionIntoHandler"></v-touch>
         </div>
         <div class="header_m">
             <!-- 此处刷新图标，点击刷新当前内容组件,顺时针旋转360° -->
@@ -19,7 +18,12 @@
 
 <script>
 export default {
-  name:"Header"
+  name:"Header",
+  methods:{
+      collectionIntoHandler(){
+          this.$router.push("/collection");
+      }
+  }
 }
 </script>
 

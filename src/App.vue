@@ -4,13 +4,17 @@
       <Nav/>
       <router-view></router-view>
     </div>
+    
 </template>
 
 <script>
 import Header from "./common/Header";
 import Nav from "./common/Nav";
-import http from "./utils/http"
+import http from "./utils/http.js"
 export default {
+  created(){
+    this.preventHandler();
+  },
   data(){
         return{
             
@@ -18,10 +22,10 @@ export default {
     },
   watch:{
         $route(to,from){
-          if(to.path==="/channels"){
+          if(to.path==="/channels" || to.path==="/collection"){
             this.$store.commit("topHideChangeMutations");
           }
-          if(from.path==="/channels"){
+          if(from.path==="/channels" || from.path==="/collection"){
             this.$store.commit("topShowChangeMutations");
           }
         }
@@ -29,6 +33,13 @@ export default {
   components:{
     Header,
     Nav
+  },
+  methods:{
+    preventHandler(){
+      window.addEventListener('contextmenu', function(e){
+	      e.preventDefault();
+	    });
+    }
   }
 }
 </script>
@@ -38,6 +49,7 @@ export default {
   html,body{
     height:100%;
     font-size: 75.04px;
+    font-family: 'STHeiti', 'Microsoft YaHei', 'Helvetica', 'Arial', sans-serif;
     margin:0;
     padding:0;
   }
