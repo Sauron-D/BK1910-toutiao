@@ -1,12 +1,12 @@
 <template>
     <div class="collection">
         <div class="collection_head">
-            <div class="collection_back">返回</div>
+            <v-touch class="collection_back" tag="div" @tap="gobackHandler">返回</v-touch>
             <div class="collection_name">收藏</div>
         </div>
         <v-touch
             tag="div"
-            @press="pressHandler($event)"
+            @press="pressHandler($event,index)"
             v-for="(item,index) in data"
             :key="index"
             class="collection_item"
@@ -20,31 +20,123 @@
 <script>
 import http from "../../utils/http";
 import Collectionbox from "../../components/collectionbox/collectionbox"
+import { setInterval, clearInterval } from 'timers';
 export default {
     name:"Collection",
     data(){
         return{
-            data:""
+            data:"",
+            pointX:0,
+            node:{},
+            nodeList:[],
+            changeIndex:0,
+            derection:"left",
+            leftNum:0,
+            timemove:null,
+            height:0
         }
     },
     created(){
         this.data=JSON.parse(localStorage.getItem("collection"));
+        this.nodeList=document.getElementsByClassName("collection_item");
+        console.log(this.nodeList);
         console.log(this.data);
     },
     methods:{
-        pressHandler(e){
+        gobackHandler(){
+            this.$router.replace("/"+this.$store.state.channel_address_show[this.$store.state.active_menu]);
+        },
+        pressHandler(e,index){
             let node = e.target;
-            while (node.parentNode.nodeName != "collection") {
+            while (node.parentNode.className != "collection") {
                 if (node.className ==="collection_item") {
                     break;
                 }
                 node = node.parentNode;
+                this.node=node;
             }
-            node.className="collection_item shadow";
-            node.addEventListener("drag",this.dragHandler)
+            this.changeIndex=index;
+            this.node.className="collection_item shadow";
+            this.node.addEventListener("touchmove",this.touchmoveHandler);
+            this.node.addEventListener("touchend",this.touchendHandler);
+            this.pointX=e.srcEvent.clientX;
         },
-        dragHandler(){
-            console.log("aaa");
+        touchmoveHandler(e){
+            let moveX=e.changedTouches[0].clientX
+            this.node.style.left=moveX-this.pointX+"px";
+        },
+        touchendHandler(e){
+            this.node.removeEventListener("touchmove",this.touchmoveHandler);
+            this.leftNum=this.node.offsetLeft;
+            if(this.node.offsetLeft<0){
+                if(this.node.offsetLeft<-250){
+                    this.timemove=setInterval(this.leftDeleteHandler,16);
+                }else{
+                    this.timemove=setInterval(this.leftRollbackHandler,16);
+                }
+            }else if(this.node.offsetLeft>0){
+                if(this.node.offsetLeft>250){
+                    this.timemove=setInterval(this.rightDeleteHandler,16);
+                }else{
+                    this.timemove=setInterval(this.rightRollbackHandler,16);
+                }
+            }else{
+                this.node.className="collection_item";
+            }
+            this.node.removeEventListener("touchend",this.touchendHandler);
+            
+        },
+        leftRollbackHandler(){
+            this.node.style.left=this.leftNum+"px";
+            this.leftNum+=10;
+            if(this.leftNum>=0){
+                this.pressupHandler();
+                this.node.className="collection_item";
+            }
+        },
+        leftDeleteHandler(){
+            this.node.style.left=this.leftNum+"px";
+            this.leftNum-=30;
+            if(this.leftNum<=-800){
+                this.pressupHandler();
+                this.floatHandler();
+            }
+        },
+        rightRollbackHandler(){
+            this.node.style.left=this.leftNum+"px";
+            this.leftNum-=10;
+            if(this.leftNum<=0){
+                this.pressupHandler();
+                this.node.className="collection_item";
+            }
+        },
+        rightDeleteHandler(){
+            this.node.style.left=this.leftNum+"px";
+            this.leftNum+=30;
+            if(this.leftNum>=800){
+                this.pressupHandler();
+                this.floatHandler();
+            }
+        },
+        pressupHandler(){
+            clearInterval(this.timemove);
+            this.timemove=null;
+        },
+        floatHandler(){
+            this.height=this.node.offsetHeight;
+            this.timemove=setInterval(this.floatupHandler,16);
+        },
+        floatupHandler(){
+            if(this.height<10){
+                this.height=0;
+            }else{
+                this.height-=10;
+            }
+            this.node.style.height=this.height+"px";
+            
+            if(this.height<=0){
+                this.pressupHandler();
+            }
         }
     },
     components:{
@@ -60,7 +152,8 @@ export default {
         width:100%;
         min-height:100px;
         background: #eee;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
         position: absolute;
         top:0;
         bottom: 0px;
@@ -95,8 +188,10 @@ export default {
     }
     .collection .collection_item{
         width: 100%;
-        min-height: 200px;
+        min-height: 0px;
         background: #fff;
+        overflow: hidden;
+        position: relative;
     }
     .shadow{
         position: relative;
