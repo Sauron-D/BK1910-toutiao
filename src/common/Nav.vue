@@ -55,6 +55,7 @@ export default {
         position: fixed;
         top: 88px;
         display: flex;
+        z-index: 10;
     }
 
 /* 滚动栏目列表 */

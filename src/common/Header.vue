@@ -36,6 +36,7 @@ export default {
         background: #d43d3d;
         position: fixed;
         top: 0;
+        z-index: 10;
     }
 
 /* 左侧emial图标部分 */
