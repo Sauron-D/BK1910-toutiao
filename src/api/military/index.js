@@ -1,0 +1,2 @@
+import http from "../../utils/http"
+export const military_one_api = () => http("get", "/list/?tag=news_military&ac=wap&count=20&format=json_raw&as=A105DD3435E9EE7&cp=5D45E9DECE57EE1&min_behot_time=0&_signature=S0dEhAAAFgRCCz6RKkuTGUtHRJ&i=", {  })

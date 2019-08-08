@@ -17,7 +17,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       tap: true,
       pullDownRefresh: true,
-      pullUpLoad: true
+      pullUpLoad: true,
     });
   },
   methods: {

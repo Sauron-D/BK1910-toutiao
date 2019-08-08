@@ -18,7 +18,7 @@ export default {
         }
     },
     created(){
-        http("get","/list/?tag=news_travel&ac=wap&count=20&format=json_raw&as=A1750D5418E2151&cp=5D4802D1C5614E1&min_behot_time=0&_signature=14rx.gAAisvexovrmHYF0deK8e&i=").then((data)=>{
+        http("get","/list/?tag=news_travel&ac= &count=20&format=json_raw&as=A1750D5418E2151&cp=5D4802D1C5614E1&min_behot_time=0&_signature=14rx.gAAisvexovrmHYF0deK8e&i=").then((data)=>{
            this.data=data.data;
            console.log(this.data);
        })
