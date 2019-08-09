@@ -22,10 +22,10 @@ export default {
     },
   watch:{
         $route(to,from){
-          if(to.path==="/channels" || to.path==="/collection"){
-            this.$store.commit("topHideChangeMutations");
+          if(to.path==="/channels" || to.path==="/collection" ||  to.path==="/serch"){
+            this.$store.commit("topHideChangeMutations" );
           }
-          if(from.path==="/channels" || from.path==="/collection"){
+          if(from.path==="/channels" || from.path==="/collection" || from.path==="/serch"){
             this.$store.commit("topShowChangeMutations");
           }
         }

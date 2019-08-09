@@ -10,7 +10,7 @@
         </div>
         <div class="header_r">
             <!-- 此处路由调转搜索页 -->
-            <a href="#"></a>
+             <v-touch tag="a" @tap="serchIntoHandler"></v-touch>
         </div>
     </div>
 </template>
@@ -38,6 +38,9 @@ export default {
       },
       rollbackHandler(){
           this.renovate.className="";
+      },
+      serchIntoHandler(){
+         this.$router.push("/serch");
       }
   }
 }

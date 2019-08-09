@@ -76,7 +76,7 @@ export default {
         let div1 = document.querySelector(".video");
         div.style.left=e.srcEvent.clientX+"px";
         div.style.top=e.srcEvent.clientY+div1.scrollTop-160+"px";
-    },
+    }, 
     voideDele(){
         this.data.splice(this.null,1)
         this.bool=false
@@ -163,8 +163,10 @@ export default {
 @keyframes enlarge {
     0% {
         width: 0px;
+        height: 0px;
     }
     100% {
+      height: 60px;
         width: 180px;
     }
 }

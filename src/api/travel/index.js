@@ -1,0 +1,2 @@
+import http from "../../utils/http"
+export const travel_one_api = () => http("get", "/list/?tag=news_travel&ac= &count=20&format=json_raw&as=A1750D5418E2151&cp=5D4802D1C5614E1&min_behot_time=0&_signature=14rx.gAAisvexovrmHYF0deK8e&i=", { })

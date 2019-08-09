@@ -14,7 +14,7 @@ import finance from "./finance/index";
 import world from "./world/index";
 import travel from "./travel/index";
 import collection from "./collection/index";
-
+import serch from "./serch/index";
 Vue.use(Router)
 
 export default new Router({
@@ -32,7 +32,8 @@ export default new Router({
     finance,
     world,
     travel,
-    collection
+    collection,
+    serch
   ]
 })
 

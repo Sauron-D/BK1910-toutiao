@@ -75,15 +75,14 @@ export default {
   name: "Rec",
   data() {
     return {
-      data: sessionStorage.getItem("data") || ""
+      data:""
     };
   },
-
   async created() {
     // if (!sessionStorage.getItem("data")) {
       let data = await rec_one_api();
       this.data = data.data;
-      // sessionStorage.setItem("data",data.data)
+      sessionStorage.setItem("data",data.data)
       console.log(this.data);
     // }
   },
@@ -101,7 +100,7 @@ export default {
         this.data=this.data.concat(dataTwo.data)
          this.$refs.awayScroll.handlefinishPullUp();
     })
-  }
+  },
 };
 </script>
 
