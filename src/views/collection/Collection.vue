@@ -127,10 +127,10 @@ export default {
             this.timemove=setInterval(this.floatupHandler,16);
         },
         floatupHandler(){
-            if(this.height<10){
+            if(this.height<15){
                 this.height=0;
             }else{
-                this.height-=10;
+                this.height-=15;
             }
             this.node.style.height=this.height+"px";
             
@@ -197,6 +197,7 @@ export default {
         position: relative;
         z-index: 1000;
         box-shadow:0px 0px 6px 6px #c8c8c8 ;
+        opacity: 0.5;
     }
 
 </style>

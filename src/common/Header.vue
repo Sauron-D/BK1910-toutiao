@@ -6,7 +6,7 @@
         <div class="header_m">
             <!-- 此处刷新图标，点击刷新当前内容组件,顺时针旋转360° -->
             <a href="#"></a>
-            <div></div>
+            <v-touch tag="div" @tap="renovateHandler($event)"></v-touch>
         </div>
         <div class="header_r">
             <!-- 此处路由调转搜索页 -->
@@ -17,11 +17,27 @@
 
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   name:"Header",
+  data(){
+      return{
+          renovate:null,
+          timeout:null
+      }
+  },
   methods:{
       collectionIntoHandler(){
           this.$router.push("/collection");
+      },
+      renovateHandler(e){
+          this.renovate=e.target;
+          this.renovate.className="rotate";
+          this.$router.go(0);
+          this.timeout=setTimeout(this.rollbackHandler,1000);
+      },
+      rollbackHandler(){
+          this.renovate.className="";
       }
   }
 }
@@ -79,6 +95,11 @@ export default {
         height: 88px;
         background: url("https://s3a.pstatp.com/growth/mobile_list/image/titlebar_refresh_small@3x_96fb31e4.png") no-repeat center center;
         background-size: 30px;
+        
+    }
+    .rotate{
+        transition: transform 1s;
+        transform: rotate(720deg);
     }
 
     /* 右侧搜索放大镜 */
